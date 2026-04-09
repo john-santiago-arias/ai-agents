@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/johnsantiagoariasmorales/.claude/agents/**)",
+      "Read(//Users/johnsantiagoariasmorales/Documents/TradeSystems/simple-commerce-platform/.cursor/rules/**)",
+      "Bash(wc -l /Users/johnsantiagoariasmorales/Documents/Proyectos/ai-agents/.claude/agents/*.md)",
+      "Bash(wc -l /Users/johnsantiagoariasmorales/.claude/commands/*.md)",
+      "Bash(wc -l /Users/johnsantiagoariasmorales/Documents/Proyectos/ai-agents/.claude/commands/*.md)"
+    ]
+  }
+}
