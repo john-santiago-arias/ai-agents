@@ -139,6 +139,15 @@ Commands included in this repository:
 - Do not bypass the PM routing logic for multi-step features.
 - Do not create automatic commits without explicit user request.
 
+## Optimized usage by work sessions
+
+In both Claude and Cursor, when using a workflow or invoking an "@agent" with a "task to perform," the context, skills, rules, and other elements are loaded with each invocation. If you need to work with one or more agents throughout a work session, the following is recommended:
+
+In the terminal or in a Cursor agent, declare from the beginning which agent to use:
+
+- Claude: `claude --system-prompt "$(cat ~/.claude/agents/apps-senior-frontend.md)"`
+- Cursor: Uses "@apps-senior-frontend" for the entire work session.
+
 ## Main structure in this repository
 
 ```text
