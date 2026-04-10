@@ -148,6 +148,8 @@ In the terminal or in a Cursor agent, declare from the beginning which agent to 
 - Claude: `claude --system-prompt "$(cat ~/.claude/agents/apps-senior-frontend.md)"`
 - Cursor: Uses "@apps-senior-frontend" for the entire work session.
 
+NOTE ONLY FOR CURSOR: If you don't use all the cursor rules and skills, it's best to delete them and keep only what you will use. That way, each time you open a new agent, it will only load what is necessary, optimizing token usage.
+
 ## Main structure in this repository
 
 ```text
