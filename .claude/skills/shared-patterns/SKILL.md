@@ -1,14 +1,15 @@
 ---
 name: shared-patterns
-description: Apply alongside react-nextjs-stack or react-native-expo-stack. Contains rules shared by both web and mobile stacks: TypeScript strict mode, TanStack Query v5, Zustand, React Hook Form, error handling, documentation standards, and integrated testing patterns (RTL for web, RNTL for mobile).
+description: Apply alongside react-nextjs-stack or react-native-expo-stack. Library patterns shared by both web and mobile stacks: TanStack Query v5, Zustand, React Hook Form, and integrated testing patterns (RTL for web, RNTL for mobile).
 allowed-tools: Read, Glob, Grep
 ---
 
 # Shared Patterns — Web & Mobile
 
-Applies to both `react-nextjs-stack` and `react-native-expo-stack`.
+Library/tooling patterns shared by `react-nextjs-stack` and `react-native-expo-stack`.
 
-→ TypeScript & error handling: `typescript-rules.md`
+Universal code rules (arrow functions, TypeScript, error handling, documentation, order, English-only) are NOT here — they live in `.claude/rules/` and load always via `CLAUDE.md`.
+
 → TanStack Query v5: `tanstack-query.md`
 → Zustand: `zustand.md`
 → React Hook Form: `react-hook-form.md`

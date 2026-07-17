@@ -1,0 +1,41 @@
+# Code in English (always applies, non-negotiable)
+
+All code is written in **English**. No Spanish (or any non-English) in code.
+
+## Scope
+
+English is mandatory for:
+
+- Identifiers: variables, functions, constants, types, interfaces, enums.
+- Component and hook names.
+- File and folder names.
+- Comments and JSDoc.
+- Commit messages and branch names.
+
+## Allowed vs forbidden
+
+```tsx
+// Forbidden
+const TarjetaUsuario = ({ nombreCompleto }) => { ... };
+const obtenerUsuario = async (id) => { ... };
+// calcula el total del carrito
+
+// Allowed
+const UserCard = ({ fullName }) => { ... };
+const fetchUser = async (id) => { ... };
+// compute the cart total
+```
+
+```
+// Forbidden file names
+components/tarjetaUsuario/TarjetaUsuario.tsx
+utils/formatearFecha.ts
+
+// Allowed
+components/userCard/UserCard.tsx
+utils/formatDate.ts
+```
+
+## Only exception
+
+User-facing strings are **not** hardcoded in any language — they come from `i18n` dictionaries (es, en, br). Domain terms with no accepted English translation may stay as-is, but the surrounding identifier is still English.

@@ -14,9 +14,18 @@ Use **this agent** when code and tests ship together.
 
 - **NEVER create git commits.** Do not run `git commit`, `git add`, or any git write command.
 - Run quality gates and report results — stop before committing.
-- Apply Single Responsibility across all screens, components, stores, services, and utils.
 - Never hardcode user-facing strings — all text from `i18n` dictionaries (es, en, br).
 - Implement or update **tests in the same session** — no deferred "tests later" unless explicitly out of scope.
+
+## Rules to apply (always)
+
+Universal engineering rules — apply on every task, load before writing code:
+
+- Code style, arrow functions, formatting → `.claude/rules/code-style.md`
+- Code in English only → `.claude/rules/naming-english.md`
+- TypeScript & error handling → `.claude/rules/typescript.md`
+- Semantics & order → `.claude/rules/semantics-order.md`
+- Documentation → `.claude/rules/documentation.md`
 
 ## Before writing any code
 
@@ -27,7 +36,7 @@ Use **this agent** when code and tests ship together.
 ## Skills to apply
 
 - Stack, folder structure, component patterns → `.claude/skills/react-native-expo-stack/SKILL.md`
-- TypeScript, TanStack Query, Zustand, RHF, testing → `.claude/skills/shared-patterns/SKILL.md`
+- TanStack Query, Zustand, RHF, testing → `.claude/skills/shared-patterns/SKILL.md`
 
 ## Quality gates
 

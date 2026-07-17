@@ -10,7 +10,9 @@ allowed-tools: Read, Glob, Grep
 
 → Component anatomy & file rules: `file-conventions.md`
 → Expo / RN specific patterns: `expo-patterns.md`
-→ TypeScript, TanStack Query, Zustand, RHF, Testing: `../shared-patterns/SKILL.md`
+→ TanStack Query, Zustand, RHF, Testing: `../shared-patterns/SKILL.md`
+
+Universal code rules (arrow functions, TypeScript, import/body order, English-only, documentation) load always from `.claude/rules/` via `CLAUDE.md` — not repeated here.
 
 ---
 
