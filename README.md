@@ -1,168 +1,191 @@
 # ai-agents
 
-Repository for storing specialized AI agents, rules, skills, and workflows for Cursor and Claude.
+Reusable template of agents, rules, skills, and hooks for **Cursor** and **Claude Code**.
 
-## What this repository is
+There are only **two** implementation agents:
 
-This repository is a reusable base that includes:
+| Agent | When to use it |
+|-------|----------------|
+| `web-software-engineer` | React / Next.js App Router (web) + Jest/RTL tests |
+| `app-software-engineer` | React Native / Expo (mobile) + Jest/RNTL tests |
 
-- specialized agents/roles
-- global workflow rules
-- role-based skills
-- pipeline commands
+Everything else is **always-on rules**, **on-demand skills** (stack and design), **quality-gate scripts**, and **hooks** that format/lint after each edit.
 
-Goal: reuse this structure in other projects to keep a consistent AI workflow in Cursor and Claude.
+---
 
-## How to reuse it in another project
+## What this includes
 
-This is not installed as a package. It is reused by copying folders and config files based on the platform:
+| Piece | Role |
+|-------|------|
+| **Agents** | Integrated engineers: feature code + tests in the same session |
+| **Rules** | Style, TypeScript, semantics, English-only code, docs — always on |
+| **Skills** | Stack patterns (Next / Expo / shared) and design — only when relevant |
+| **Hooks** | After each edit: Prettier → ESLint `--fix` |
+| **Scripts** | `check-types` → `lint` → `test:ci` |
 
-- **For Cursor**: copy `.cursor/`.
-- **For Claude**: copy `.claude/` and `CLAUDE.md`.
-- You can keep both structures (`.cursor` and `.claude`) in parallel in the same project.
+This is not an npm package. **Copy** it into the target project and adapt it.
 
-After copying, adjust context and conventions for the new repository:
+---
 
-1. Update context files for the selected platform:
-   - Cursor: `.cursor/PROJECT_CONTEXT.md`
-   - Claude: `CLAUDE.md`
-2. Update real project scripts/commands (`yarn`, `pnpm`, `npm`, etc.).
-3. Review branch naming, commit format, and deployment constraints.
-
-## Step by step for Cursor
-
-### 1) Copy the base structure
-
-In the target project, copy:
-
-- `.cursor/rules/`
-- `.cursor/skills/`
-- `.cursor/commands/`
-- `.cursor/PROJECT_CONTEXT.md`
-
-### 2) Adjust project context
-
-Edit:
-
-- `.cursor/PROJECT_CONTEXT.md`
-
-Set these values correctly:
-
-- whether the default frontend agent is `web-senior-frontend` or `apps-senior-frontend`
-- allowed pipelines
-- actual quality gates used by the repository
-
-### 3) Understand how the workflow is triggered
-
-In Cursor, you can work in two ways:
-
-- **By commands**: using files in `.cursor/commands/`
-- **By role**: explicitly requesting a role (pm, analyst, architect, frontend, backend, qa)
-
-Commands included in this repository (same as Claude):
-
-- `/feature` -> full-stack
-- `/dev` -> frontend + qa
-
-### 4) Recommended workflow (example)
-
-1. Run `/feature <requirement>`.
-2. PM classifies the pipeline and defines the plan.
-3. Roles run according to the route:
-   - `analyst`
-   - `architect` + `designer` (if needed)
-   - frontend (`web-senior-frontend` or `apps-senior-frontend`) + `backend` (if needed)
-   - `qa`
-4. Validate quality with:
-   - `yarn check-types`
-   - `yarn lint`
-   - `yarn test:ci`
-
-### 5) Important rules
-
-- Do not create automatic commits without explicit user request.
-- Keep clear layer boundaries (frontend/backend/qa) and explicit contracts.
-- Do not delete the alternate platform structure when working in dual mode (`.cursor` + `.claude`).
-
-## Step by step for Claude
-
-### 1) Copy the base structure
-
-In the target project, copy:
-
-- `.claude/agents/`
-- `.claude/commands/`
-- `CLAUDE.md`
-
-### 2) Adjust project context
-
-Edit:
-
-- `CLAUDE.md`
-
-Set these values correctly:
-
-- project type (web/mobile)
-- default frontend agent (`web-senior-frontend` or `apps-senior-frontend`)
-- pipeline matrix and skip rules
-- quality gates used by the repository
-
-### 3) Understand how the workflow is triggered
-
-In Claude, you can work in two ways:
-
-- **By commands**: using files in `.claude/commands/`
-- **By role**: explicitly invoking agents in `.claude/agents/`
-
-Commands included in this repository:
-
-- `/feature` -> full-stack
-- `/dev` -> frontend + qa
-
-### 4) Recommended workflow (example)
-
-1. Run `/feature <requirement>`.
-2. PM classifies the pipeline and writes `WORK_PLAN.md`.
-3. Roles run according to the route:
-   - `analyst`
-   - `architect` + `designer` (if needed)
-   - frontend (`web-senior-frontend` or `apps-senior-frontend`) + `backend` (if needed)
-   - `qa`
-4. Validate quality with:
-   - `yarn check-types`
-   - `yarn lint`
-   - `yarn test:ci`
-
-### 5) Important rules
-
-- Keep agent instructions aligned with `CLAUDE.md`.
-- Do not bypass the PM routing logic for multi-step features.
-- Do not create automatic commits without explicit user request.
-
-## Optimized usage by work sessions
-
-In both Claude and Cursor, when using a workflow or invoking an "@agent" with a "task to perform," the context, skills, rules, and other elements are loaded with each invocation. If you need to work with one or more agents throughout a work session, the following is recommended:
-
-In the terminal or in a Cursor agent, declare from the beginning which agent to use:
-
-- Claude: `claude --agent=apps-senior-frontend`
-- Cursor: Uses "@apps-senior-frontend" for the entire work session.
-
-NOTE ONLY FOR CURSOR: If you don't use all the cursor rules and skills, it's best to delete them and keep only what you will use. That way, each time you open a new agent, it will only load what is necessary, optimizing token usage.
-
-## Main structure in this repository
+## Repository structure
 
 ```text
-.claude/
-.cursor/
-CLAUDE.md
+AGENTS.md                 # Cursor brief (always on)
+CLAUDE.md                 # Claude Code brief (always on)
 README.md
+
+.cursor/                  # Cursor pack
+  PROJECT_CONTEXT.md
+  agents/
+    web-software-engineer.md
+    app-software-engineer.md
+  rules/                  # *.mdc, alwaysApply
+  skills/                 # stack + design
+  hooks.json
+  hooks/format.sh
+  scripts/quality-gates.sh
+
+.claude/                  # Claude Code pack
+  agents/
+  rules/                  # *.md
+  skills/
+  settings.json           # PostToolUse prettier/eslint
+  scripts/quality-gates.sh
 ```
 
-## Usage note
+Both folders are **functionally equivalent**. Use one platform or both in the same project.
 
-This repository is an operational template. Recommended approach:
+---
 
-1. copy the platform-specific structure into the new project,
-2. adapt context and rules to the real domain,
-3. run command/role workflows from day one to keep consistency.
+## Choosing an agent
+
+1. **Web (Next.js)** project → default `web-software-engineer`
+2. **Mobile (Expo / RN)** project → default `app-software-engineer`
+3. If the user names an agent explicitly → use that one, no override
+
+Stack skills load when the task matches (`react-nextjs-stack`, `react-native-expo-stack`, `shared-patterns`). Design skills (`design-taste-frontend`, `emil-desing-eng`, `ui-ux-pro-max`) are on-demand for UI / landing / polish work.
+
+---
+
+## Cursor guide
+
+### 1. Copy
+
+Into the target project:
+
+```bash
+cp AGENTS.md /path/to/project/
+cp -R .cursor /path/to/project/
+```
+
+### 2. Adapt (required)
+
+| File | What to change |
+|------|----------------|
+| `AGENTS.md` | What the project is; default agent (web vs mobile); real gates |
+| `.cursor/PROJECT_CONTEXT.md` | Same context, paths, and conventions for the repo |
+| Quality gates | If you do not use `pnpm`, switch to `yarn`/`npm` in agents, `PROJECT_CONTEXT`, `scripts/quality-gates.sh`, and `hooks/format.sh` |
+| Skills | Delete the unused stack (e.g. drop `react-native-expo-stack` in a web-only repo) to save tokens |
+
+### 3. Day-to-day usage
+
+1. Open Agent chat in Cursor inside the project.
+2. Invoke the agent at the start of the session:
+   - `/web-software-engineer` — web feature + tests
+   - `/app-software-engineer` — mobile feature + tests
+   - Or in natural language: *“use web-software-engineer to…”*
+3. **Rules** (`.cursor/rules/*.mdc`) apply automatically.
+4. Stack **skills** activate when the task matches their `description`.
+5. After each file edit, the `afterFileEdit` hook runs Prettier then ESLint `--fix` (the consumer project must have those binaries).
+
+### 4. Closing a task
+
+The agent must report gates (it does not commit):
+
+```bash
+pnpm check-types
+pnpm lint
+pnpm test:ci
+```
+
+Or: `.cursor/scripts/quality-gates.sh`
+
+### 5. Hard agent rules
+
+- Never `git commit` / `git add` unless you explicitly ask
+- UI strings via i18n (es / en / br), never hardcoded
+- Tests ship in the same session as the feature
+
+---
+
+## Claude Code guide
+
+### 1. Copy
+
+Into the target project:
+
+```bash
+cp CLAUDE.md /path/to/project/
+cp -R .claude /path/to/project/
+```
+
+### 2. Adapt (required)
+
+| File | What to change |
+|------|----------------|
+| `CLAUDE.md` | What the project is; default agent; `@` includes for rules; real gates |
+| Quality gates | If you do not use `pnpm`, update `CLAUDE.md`, agents, `scripts/quality-gates.sh`, and the command in `settings.json` |
+| Skills | Remove the unused stack under `.claude/skills/` |
+
+### 3. Day-to-day usage
+
+1. Open Claude Code in the repo.
+2. Invoke the agent:
+   - Web: `web-software-engineer`
+   - Mobile: `app-software-engineer`
+3. `CLAUDE.md` loads always-on **rules** via `@.claude/rules/...`.
+4. Stack **skills** load when the stack applies (agents point at them).
+5. After each `Write`/`Edit`, the `PostToolUse` hook in `.claude/settings.json` runs Prettier then ESLint `--fix`.
+
+### 4. Closing a task
+
+```bash
+pnpm check-types
+pnpm lint
+pnpm test:ci
+```
+
+Or: `.claude/scripts/quality-gates.sh`
+
+### 5. Hard agent rules
+
+Same as Cursor: no automatic commits, i18n, tests in the same session.
+
+---
+
+## Dual mode (Cursor + Claude)
+
+If the team uses both tools:
+
+1. Copy **both** packs (`AGENTS.md` + `.cursor/` and `CLAUDE.md` + `.claude/`).
+2. Keep the same meaning across agents / rules / skills (paths differ: `.cursor` vs `.claude`).
+3. Do not delete one platform “because you do not use it today” if another teammate does.
+
+---
+
+## Post-copy checklist
+
+- [ ] Filled in “What this project is” in `AGENTS.md` and/or `CLAUDE.md`
+- [ ] Default agent is correct (web vs mobile)
+- [ ] Gate scripts match the project `package.json`
+- [ ] Prettier + ESLint installed (if you want format-on-edit)
+- [ ] Removed the opposite-stack skills (optional, recommended)
+- [ ] Smoke-tested agent invoke on a small task
+
+---
+
+## Notes
+
+- This meta-repo has **no** `package.json`: Prettier/ESLint/gates only run in the **consumer project**.
+- Agents **never** create commits; you decide when to commit.
+- Cursor ↔ Claude parity: same two agents, same rules/skills; only native paths and formats differ (`.mdc` + `hooks.json` vs `.md` + `settings.json`).

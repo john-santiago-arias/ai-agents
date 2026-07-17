@@ -1,0 +1,60 @@
+---
+description: Simplicity, SRP, 300-line max, import and component body order
+alwaysApply: true
+---
+
+# Semantics & Order (always applies)
+
+Universal rules for how code is structured and ordered. Applies to every stack.
+
+## Semantics
+
+- Simplest working solution. No over-engineering.
+- Single Responsibility across pages, screens, components, stores, services, and utils.
+- No abstractions for single-use operations. Three similar lines beat a premature abstraction.
+- No speculative features.
+- Read the file before modifying it. Never edit blind.
+- No docstrings or type annotations on code not being changed.
+- No error handling for scenarios that cannot happen.
+- **Max 300 lines per file** — split if exceeded.
+- Complex logic → extract to a variable or `.helpers.ts`. Long JSX branches → extract to a named sibling subcomponent.
+
+## Import order
+
+```
+1. External packages (React, Next.js, UI libs...)
+[blank line]
+2. Co-located: ./ComponentName.types, ./ComponentName.helpers
+3. Relative siblings ../
+4. Project aliases — alphabetical
+[blank line]
+5. Assets (.svg, images, fonts)
+```
+
+- One import per line. Merge symbols from the same module.
+
+## Component body order (React web + mobile)
+
+1. Props destructuring
+2. Library hooks (`useRouter`, `usePathname`, ...)
+3. Store selectors / data hooks (`useQuery`, stores)
+4. Project custom hooks
+5. Local state (`useState`, `useReducer`)
+6. Derived values and constants (no JSX)
+7. Hooks dependent on earlier values
+8. Handler functions (`onClick`, `handleSubmit`) — named, before effects
+9. `useEffect` / `useLayoutEffect` / subscriptions
+10. `return` — view tree only; simple ternaries only; no business logic
+
+## Implementation order (universal skeleton)
+
+1. **Types** — `ComponentName.types.ts`
+2. **Helpers** — `ComponentName.helpers.ts`
+3. **Styles**
+4. **Service** — `<feature>.service.ts` + `<feature>.service.types.ts`
+5. **Query hooks** — `<feature>.service.hooks.ts`
+6. **Store** — `<feature>.store.ts` + types + helpers
+7. **Component / view**
+8. **Tests** — colocated, after each logical slice
+
+Stack-specific steps (server/client boundary, forms, screens, navigation) live in the stack skill.

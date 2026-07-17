@@ -1,0 +1,28 @@
+---
+description: Strict TypeScript, path aliases, import type, and explicit error handling
+alwaysApply: true
+---
+
+# TypeScript (always applies)
+
+Universal TypeScript rules. Applies to every stack.
+
+## Types
+
+- `strict: true` — no implicit `any`.
+- No unchecked index access.
+- No implicit returns on complex branches.
+- Explicit types for all: props, payloads, responses, state shapes.
+- If a type is truly unavoidable to express: `// TODO: type this - <reason>`.
+
+## Imports
+
+- Path aliases from tsconfig — never deep relative imports.
+- `import type` for type-only imports.
+
+## Error handling
+
+- Async flows: explicit error behavior — user feedback, fallback UI, or retry path.
+- Never silently swallow exceptions.
+- Console logs must be actionable — no noise in stable paths.
+- Do not add error handling for scenarios that cannot happen.
