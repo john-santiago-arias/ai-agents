@@ -6,6 +6,8 @@
 
 **Default web agent:** `web-software-engineer`
 **Default mobile agent:** `app-software-engineer`
+**Web QA E2E agent:** `web-qa-engineer` (Playwright end-to-end tests for QA)
+**App QA E2E agent:** `app-qa-engineer` (Maestro mobile end-to-end tests for QA)
 
 ## Always-active rules
 
@@ -23,6 +25,8 @@ Stack-specific and library patterns are on-demand skills under `.cursor/skills/`
 
 - Web: `.cursor/agents/web-software-engineer.md`
 - Mobile: `.cursor/agents/app-software-engineer.md`
+- Web QA E2E: `.cursor/agents/web-qa-engineer.md`
+- App QA E2E: `.cursor/agents/app-qa-engineer.md`
 
 ## Git conventions
 
@@ -30,6 +34,10 @@ Stack-specific and library patterns are on-demand skills under `.cursor/skills/`
 - Commit format: `feat(scope): description` / `fix(scope): description`
 - One PR per agent pipeline run
 - **Agents never run `git commit` or `git add`**
+  - **Exception — QA agents (`web-qa-engineer`, `app-qa-engineer`) only:** each creates a
+    `test/<feature>` branch, and after tests pass green it may `git add` / `git commit` / `git push`
+    **but only after explicit confirmation**. Every new task restarts the flow on a fresh branch.
+    No other agent commits.
 
 ## Output rules
 

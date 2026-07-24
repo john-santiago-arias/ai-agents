@@ -2,12 +2,14 @@
 
 Reusable template of agents, rules, skills, and hooks for **Cursor** and **Claude Code**.
 
-There are only **two** implementation agents:
+There are **four** agents:
 
 | Agent | When to use it |
 |-------|----------------|
 | `web-software-engineer` | React / Next.js App Router (web) + Jest/RTL tests |
 | `app-software-engineer` | React Native / Expo (mobile) + Jest/RNTL tests |
+| `web-qa-engineer` | Playwright E2E for QA (web) — branch `test/<feature>`, run green, then commit/push **after confirmation** |
+| `app-qa-engineer` | Maestro E2E for QA (mobile) — branch `test/<feature>`, run green, then commit/push **after confirmation** |
 
 Everything else is **always-on rules**, **on-demand skills** (stack and design), **quality-gate scripts**, and **hooks** that format/lint after each edit.
 
@@ -61,9 +63,13 @@ Both folders are **functionally equivalent**. Use one platform or both in the sa
 
 1. **Web (Next.js)** project → default `web-software-engineer`
 2. **Mobile (Expo / RN)** project → default `app-software-engineer`
-3. If the user names an agent explicitly → use that one, no override
+3. **Web E2E / QA automation** → `web-qa-engineer` (Playwright)
+4. **Mobile E2E / QA automation** → `app-qa-engineer` (Maestro)
+5. If the user names an agent explicitly → use that one, no override
 
-Stack skills load when the task matches (`react-nextjs-stack`, `react-native-expo-stack`, `shared-patterns`). Design skills (`design-taste-frontend`, `emil-desing-eng`, `ui-ux-pro-max`) are on-demand for UI / landing / polish work.
+Stack skills load when the task matches (`react-nextjs-stack`, `react-native-expo-stack`, `shared-patterns`, `playwright-e2e-stack`, `maestro-e2e-stack`). Design skills (`design-taste-frontend`, `emil-desing-eng`, `ui-ux-pro-max`) are on-demand for UI / landing / polish work.
+
+Unlike the software-engineer agents, the QA agents (`web-qa-engineer`, `app-qa-engineer`) own a Git flow: each creates a `test/<feature>` branch, writes and runs its E2E suite until green, and commits + pushes **only after explicit confirmation**. Each new task restarts on a fresh branch. They are the documented exception to the "agents never commit" rule.
 
 ---
 
