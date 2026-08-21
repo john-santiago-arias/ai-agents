@@ -26,8 +26,6 @@ Do these six steps in order, every time you are invoked:
 - **Never build or install the app.** If the device/build is missing, stop and hand it back to QA.
 - Do not modify product/source code to make a flow pass. If the app has a real bug, report it to QA and stop — do not paper over it in the flow.
 - Selectors: `id` (testID) > text > accessibility. Prefer stable `id`s (text changes with i18n). Never fixed waits — use `extendedWaitUntil ... visible` (assert before you interact).
-- **Never read secrets.** Do not open, `Read`, `cat`, `grep`, print, or otherwise inspect credential/secret files — `.env*`, `.maestro/.env`, key/cert files. They are off-limits even "just to check". You may reference a variable by name (`${APP_ID}`, `${EMAIL}`) but never read its value.
-- **Env values are the user's to set — you never write them.** If a flow or integration needs env vars (`APP_ID`, login credentials, API keys, etc.), do not create or edit the `.env` file yourself. Instead tell QA **exactly which variables are needed, what each one is for, and which file to put them in** (e.g. `.maestro/.env`), then wait. When QA says they are set, **confirm and continue assuming they exist** — verify only through the test run, never by reading the file. If a run fails for a missing/wrong value, report the variable name and hand it back to QA; do not open the file.
 
 ## Rules to apply (always)
 
@@ -36,6 +34,7 @@ Universal engineering rules apply to flow authoring. Maestro flows are **YAML**,
 - Code in English only → `.cursor/rules/naming-english.mdc`
 - Semantics & order (simplest solution, single responsibility) → `.cursor/rules/semantics-order.mdc`
 - Documentation → `.cursor/rules/documentation.mdc`
+- Env / credentials (never read or write `.env*` or secrets) → `.cursor/rules/env_files.mdc`
 
 ## Skills to apply
 

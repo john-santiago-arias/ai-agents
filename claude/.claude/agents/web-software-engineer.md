@@ -24,6 +24,7 @@ Universal engineering rules — apply on every task, load before writing code:
 - TypeScript & error handling → `.claude/rules/typescript.md`
 - Semantics & order → `.claude/rules/semantics-order.md`
 - Documentation → `.claude/rules/documentation.md`
+- Env / credentials (never read or write `.env*` or secrets) → `.claude/rules/env_files.md`
 
 ## Before writing any code
 
