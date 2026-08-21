@@ -29,8 +29,8 @@ appId: ${APP_ID}
 - Keep `APP_ID` and any credentials in `.maestro/.env` (gitignored) or the shell env; never hardcode
   secrets in flows.
 - **The agent never reads or writes secret files.** It lists the needed variables and their purpose
-  and asks QA to set them manually, then continues assuming they exist (see the `app-qa-engineer`
-  non-negotiable rules). `.env*` and `.maestro/.env` are never opened.
+  and asks QA to set them manually, then continues assuming they exist (see `env_files.md`).
+  `.env*` and `.maestro/.env` are never opened.
 
 ## Running — assume-installed model
 

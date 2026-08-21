@@ -18,6 +18,7 @@ Universal engineering rules live under `.cursor/rules/` and apply every session:
 - `.cursor/rules/typescript.mdc`
 - `.cursor/rules/semantics-order.mdc`
 - `.cursor/rules/documentation.mdc`
+- `.cursor/rules/env_files.mdc`
 
 Stack-specific and library patterns are on-demand skills under `.cursor/skills/` — loaded only when that stack applies.
 

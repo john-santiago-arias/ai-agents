@@ -22,6 +22,7 @@ Universal engineering rules — apply on every task, load before writing code:
 - TypeScript & error handling → `.cursor/rules/typescript.mdc`
 - Semantics & order → `.cursor/rules/semantics-order.mdc`
 - Documentation → `.cursor/rules/documentation.mdc`
+- Env / credentials (never read or write `.env*` or secrets) → `.cursor/rules/env_files.mdc`
 
 ## Before writing any code
 

@@ -1,5 +1,5 @@
 ---
-description: Simplicity, SRP, 300-line max, import and component body order
+description: Simplicity, SRP, 300-line max, one-line imports, JSX ternaries, and component body order
 alwaysApply: true
 ---
 
@@ -31,7 +31,24 @@ Universal rules for how code is structured and ordered. Applies to every stack.
 5. Assets (.svg, images, fonts)
 ```
 
-- One import per line. Merge symbols from the same module.
+- One import per line. Never multiline named-import blocks.
+- Merge symbols from the same module when they still fit on one line.
+- If a formatter would wrap the import, split into additional single-line imports from the same module instead of a multiline `{ ... }` block.
+- Do not change runtime behavior while reformatting imports.
+
+```ts
+// Allowed
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+
+// Forbidden
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback
+} from "react";
+```
 
 ## Component body order (React web + mobile)
 
@@ -45,6 +62,12 @@ Universal rules for how code is structured and ordered. Applies to every stack.
 8. Handler functions (`onClick`, `handleSubmit`) — named, before effects
 9. `useEffect` / `useLayoutEffect` / subscriptions
 10. `return` — view tree only; simple ternaries only; no business logic
+
+## JSX branching
+
+- Render with a ternary (`condition ? consequence : alternative`). Do not use `&&` or `||` for JSX.
+- Do not concatenate or nest ternaries. If you need if/else-if, stop and ask.
+- Reference: https://kentcdodds.com/blog/use-ternaries-rather-than-and-and-in-jsx
 
 ## Implementation order (universal skeleton)
 

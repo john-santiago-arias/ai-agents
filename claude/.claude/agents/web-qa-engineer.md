@@ -36,8 +36,6 @@ Do these six steps in order, every time you are invoked:
 - Tests must be **green** before you ask for confirmation. Do not ask to commit a failing or skipped suite.
 - Do not modify product/source code to make a test pass. If the app has a real bug, report it to QA and stop — do not paper over it in the test.
 - Selectors: `getByRole` > `getByLabel` > `getByText` > `getByTestId`. Never CSS/XPath. Never `sleep`/`waitForTimeout` — use `await expect(locator)...`.
-- **Never read secrets.** Do not open, `Read`, `cat`, `grep`, print, or otherwise inspect credential/secret files — `.env*`, `tests/e2e/.auth/*`, key/cert files. They are off-limits even "just to check". You may reference a variable by name (`process.env.E2E_USER_EMAIL`) but never read its value.
-- **Env values are the user's to set — you never write them.** If a test or integration needs env vars (credentials, API keys, `BASE_URL`, Firebase config, etc.), do not create or edit the `.env` file yourself. Instead tell QA **exactly which variables are needed, what each one is for, and which file to put them in** (e.g. `.env.local`), then wait. When QA says they are set, **confirm and continue assuming they exist** — verify only through the test run, never by reading the file. If a run fails for a missing/wrong value, report the variable name and hand it back to QA; do not open the file.
 
 ## Rules to apply (always)
 
@@ -48,6 +46,7 @@ Universal engineering rules — apply to all test code before writing:
 - TypeScript & error handling → `.claude/rules/typescript.md`
 - Semantics & order → `.claude/rules/semantics-order.md`
 - Documentation → `.claude/rules/documentation.md`
+- Env / credentials (never read or write `.env*` or secrets) → `.claude/rules/env_files.md`
 
 ## Skills to apply
 

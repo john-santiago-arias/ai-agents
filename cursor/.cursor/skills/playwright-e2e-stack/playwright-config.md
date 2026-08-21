@@ -114,6 +114,6 @@ execute live in the browser, and inspects each step, DOM snapshot, and network c
   Document only their **names and purpose** in `.env.example` (no real values); never hardcode secrets
   in specs.
 - **The agent never reads or writes secret files.** It lists the needed variables and their purpose
-  and asks QA to set them manually, then continues assuming they exist (see the `web-qa-engineer`
-  non-negotiable rules). `.env*` and `.auth/*` are never opened.
+  and asks QA to set them manually, then continues assuming they exist (see `env_files.mdc`).
+  `.env*` and `.auth/*` are never opened.
 - Browsers: `pnpm exec playwright install --with-deps` on first run.

@@ -18,6 +18,7 @@ Universal engineering rules (code, semantics, order, style) load on every sessio
 @.claude/rules/typescript.md
 @.claude/rules/semantics-order.md
 @.claude/rules/documentation.md
+@.claude/rules/env_files.md
 
 Stack-specific and library patterns are on-demand skills under `.claude/skills/` — loaded only when that stack applies.
 
