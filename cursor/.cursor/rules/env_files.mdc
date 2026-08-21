@@ -1,0 +1,13 @@
+---
+description: Enforce read-mode when working with environment variables
+alwaysApply: true
+---
+
+# Read only for environment files
+
+You cannot read environment variables located on files like .env, do not read Firebase credentials or any other type of credentials on the project.
+Just assume the variable exist and continue. Do not attempt to modify a .env, less alone keep those values in memory and share them.
+
+## Notes
+
+- If you cannot continue without looking for the env value, stop everything and ask.

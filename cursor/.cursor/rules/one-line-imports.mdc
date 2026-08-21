@@ -1,0 +1,46 @@
+---
+description: Enforce single-line imports in JS/TS files
+globs:
+  - "**/*.js"
+  - "**/*.jsx"
+  - "**/*.ts"
+  - "**/*.tsx"
+alwaysApply: false
+---
+
+# One-Line Imports
+
+When adding or editing imports:
+
+- Keep each import statement on a single line whenever possible.
+- Avoid multiline named import blocks.
+- If a formatter or linter forces multiline imports, split into additional single-line import statements instead of using a multiline block.
+- Preserve existing import ordering conventions in the file.
+- Apply this rule on all code edits where imports are touched.
+
+## Preferred pattern
+
+Use:
+
+```typescript
+import React from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { Button } from "@/components/Button";
+```
+
+Avoid:
+
+```typescript
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
+```
+
+## Notes
+
+- Do not change runtime behavior while reformatting imports.
+- If a path alias or style rule prevents combining imports, add a new import line rather than using multiline braces.

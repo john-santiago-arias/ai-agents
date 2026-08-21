@@ -1,0 +1,19 @@
+---
+description: Enforce ternaries when working with JSX components, do not use &&
+globs:
+  - "**/*.jsx"
+  - "**/*.tsx"
+alwaysApply: false
+---
+
+# Use ternaries but do not concatenate them
+
+We strongly suggest that rather than abusing && (or || for that matter) in JSX, you use actual branching syntax features, like ternaries (condition ? trueConsequent : falseConsequent). With that we do not abuse the logical AND operator for rendering.
+
+Using a ternary has two main benefits: we are being explicit of what we are rendering and ternaries are more readable.
+
+Also, do not concatenate two ternaries (like if-elseif with another elseif and so on), because that would produce unmaintainable code. If you want to do that, stop everything and ask the user to assist you.
+
+## Notes
+
+- If you need more information, please visit https://kentcdodds.com/blog/use-ternaries-rather-than-and-and-in-jsx
